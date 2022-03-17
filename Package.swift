@@ -1,4 +1,4 @@
-// swift-tools-version: 5.6
+// swift-tools-version:5.6
 import PackageDescription
 
 let package = Package(
@@ -10,6 +10,7 @@ let package = Package(
     .executable(name: "swiftgen", targets: ["SwiftGen"]),
     .library(name: "SwiftGenCLI", targets: ["SwiftGenCLI"]),
     .library(name: "SwiftGenKit", targets: ["SwiftGenKit"]),
+    .plugin(name: "SwiftGenPlugin", targets: ["SwiftGenPlugin"])
   ],
   dependencies: [
     .package(url: "https://github.com/jpsim/Yams.git", from: "4.0.6"),
@@ -40,6 +41,16 @@ let package = Package(
       "PathKit",
       "Yams"
     ]),
+    .plugin(
+      name: "SwiftGenPlugin",
+      capability: .buildTool(),
+      dependencies: ["SwiftGenBinaryTarget"]
+     ),
+    .binaryTarget(
+      name: "SwiftGenBinaryTarget",
+      url: "https://github.com/Kondamon/SwiftGen/raw/stable/swiftgen-executables.zip",
+      checksum: "6b4e5cde1c064aeb911b644ab8ecdfa93449634a9c38dcc0ca05ef73c3d631fd"
+     ),
     .testTarget(name: "SwiftGenKitTests", dependencies: [
       "SwiftGenKit",
       "TestUtils"
