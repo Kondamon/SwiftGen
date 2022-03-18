@@ -22,7 +22,7 @@ import PackagePlugin
             ],
             environment: [
                 "PROJECT_DIR": "\(context.package.directory)",
-                "TARGET_NAME": "\(context.package.targets.first!)",
+                "TARGET_NAME": "\(target.name)",
                 "DERIVED_SOURCES_DIR": "\(genSourcesDir)",
             ],
             outputFilesDirectory: genSourcesDir)]
